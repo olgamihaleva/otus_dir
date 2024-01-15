@@ -1,0 +1,17 @@
+{
+  "name": "hello_otus",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node main.js",
+    "format": "npx prettier . --check",
+    "format:fix": "npx prettier . --write"
+  },
+  "author": "Olga Mihaleva",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^8.56.0",
+    "prettier": "3.2.1"
+  }
+}
