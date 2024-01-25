@@ -1,6 +1,10 @@
-//первые unit тесты для функций в файле modules.js
+// первые unit тесты для функций в файле modules.js
 
 import { greet, farewell } from '../src/modules.js'
+
+// тесты на tales.js
+
+import {kolobok, newYear} from '../src/tale.js';
 
 describe('greet function', () => {
   it('should return a greeting message with the given name', () => {
@@ -26,17 +30,13 @@ describe('farewell function', () => {
   })
 })
 
-// тесты на tales.js
-
-import {kolobok, newYear} from '../src/tale.js';
-
-describe('function kolobok ', () => {
+describe('function kolobok', () => {
   it('fn kolobok should return "Меня съели"', () => {
     const result = kolobok('Лиса')
     expect(result).toBe("Меня съели")
 })
  
-//Тест на код, который возвращает ошибку
+// Тест на код, который возвращает ошибку
   it('fn kolobok meet unknown', () => {
     expect( () => {
       kolobok('неизвестный')
@@ -44,7 +44,7 @@ describe('function kolobok ', () => {
   })
 });
 
-describe('function newYear ', () => {
+describe('function newYear', () => {
   it('fn newYear should return "Снегурочка! Снегурочка! Снегурочка!"', () => {
     const result = newYear('Снегурочка')
     expect(result).toBe("Снегурочка! Снегурочка! Снегурочка!")
