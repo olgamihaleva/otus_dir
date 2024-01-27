@@ -8,21 +8,23 @@ kolobok('дедушка') // Я от дедушки ушёл
 kolobok('лиса') // Меня съели */
 
 export function kolobok(name) {
-    switch(name) {
-        case 'Дедушка': return "Я от дедушки ушёл";
-        break; 
+  switch (name) {
+    case "Дедушка":
+      return "Я от дедушки ушёл";
+      break;
 
-        case 'Заяц': return "Я от зайца ушел";
-        break; 
+    case "Заяц":
+      return "Я от зайца ушел";
+      break;
 
-        case 'Лиса': return "Меня съели";
-        break;
+    case "Лиса":
+      return "Меня съели";
+      break;
 
-        default:
-          throw new Error('Я встретил кого-то неизвестного'); // добавили ошибку 
-    }
+    default:
+      throw new Error("Я встретил кого-то неизвестного"); // добавили ошибку
+  }
 }
-
 
 /* Задание 2:
 
@@ -31,6 +33,6 @@ export function kolobok(name) {
 Функция возвращает: "Дед Мороз! Дед Мороз! Дед Мороз!" или "Снегурочка! Снегурочка! Снегурочка!";
 В функции используйте шаблонные строки; */
 
-export function newYear(name){
+export function newYear(name) {
   return `${name}! ${name}! ${name}!`;
 }
