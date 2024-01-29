@@ -19,6 +19,7 @@ const userDontExist = "userolga2";
 const password = "Qwe0000!";
 const invalidPassword = "qwe";
 let bearerToken = "";
+
 let userId = "";
 
 // Регулярное выражения для тестов
@@ -44,7 +45,7 @@ async function createUser(userName, password) {
 //Функция генерации токена
 
 async function generateToken(userName, password) {
-  const token = "Bearer " + bearerToken;
+  
   const response = await fetch(
     "https://bookstore.demoqa.com/Account/v1/GenerateToken",
     {
@@ -54,9 +55,10 @@ async function generateToken(userName, password) {
         password,
       }),
       headers: {
-        "Content-Type": "application/json",
-        Authorization: token,
+        "Content-Type": "application/json"
+       
       },
+      
     },
   );
 
@@ -80,10 +82,10 @@ async function getAuthorized(userName, password) {
   return response;
 }
 
-//Функция удаления пользователя
-async function deleteUser(userId) {
+// Функция удаления пользователя
+async function deleteUser(userId, bearerToken) {
   const urlForDelete = "https://bookstore.demoqa.com/Account/v1/User/" + userId;
-  console.log(urlForDelete);
+  
   const response = await fetch(urlForDelete, {
     method: "DELETE",
     headers: {
@@ -91,6 +93,7 @@ async function deleteUser(userId) {
       Authorization: bearerToken,
     },
   });
+
   return response;
 }
 
@@ -100,7 +103,7 @@ describe("Bookstore api tests - create user", () => {
     const response = await createUser(userName, password);
     const data = await response.json();
     userId = data.userID; //сохраняю юзер айди для удаления в конце тестов
-    console.log(userId);
+  
 
     expect(response.status).toBe(201);
     expect(uuidRegex.test(data.userID)).toBe(true);
@@ -132,7 +135,9 @@ describe("Bookstore api tests - token generate", () => {
   test("Успешная генерация токена", async () => {
     const response = await generateToken(userName, password);
     const data = await response.json();
-    bearerToken = data.token;
+    bearerToken = `Bearer ${data.token}`;
+    console.log(bearerToken);
+
     expect(response.status).toBe(200);
     expect(tokenRegex.test(data.token)).toBe(true);
     expect(expiresRegex.test(data.expires)).toBe(true);
@@ -163,9 +168,7 @@ describe("Bookstore api tests - авторизация юзера", () => {
 
 describe("Bookstore api tests - удаление юзера", () => {
   test("Успешное удаление юзера", async () => {
-    const response = await deleteUser(userId);
-    const data = await response.json();
+    const response = await deleteUser(userId, bearerToken);
     expect(response.status).toBe(200);
-    console.log(data);
   });
 });
