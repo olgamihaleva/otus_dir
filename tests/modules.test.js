@@ -6,6 +6,8 @@ import { greet, farewell } from "../src/modules.js";
 
 import { kolobok, newYear } from "../src/tale.js";
 
+import config from "../framework/config/config";
+
 describe("greet function", () => {
   it("should return a greeting message with the given name", () => {
     const result = greet("John");
@@ -50,3 +52,5 @@ describe("function newYear", () => {
     expect(result).toBe("Снегурочка! Снегурочка! Снегурочка!");
   });
 });
+
+console.log(config);
