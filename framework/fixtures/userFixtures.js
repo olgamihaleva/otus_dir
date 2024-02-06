@@ -1,6 +1,7 @@
 import { faker } from "@faker-js/faker";
 
 export function generateUserData() {
+
   return {
     userName: faker.person.fullName(),
     userFirstName: faker.person.firstName(),

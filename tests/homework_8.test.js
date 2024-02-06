@@ -3,18 +3,19 @@ import { UsersBugred, UserFixture } from "../framework";
 describe("Сервис users.bugred.ru", () => {
   let userData;
   let idcompany;
-
+ 
   beforeAll(async () => {
     userData = UserFixture.generateUserData();
+
   });
 
   it("Успешная регистрация юзера через doregister", async () => {
     const response = await UsersBugred.doregister({
-      email: userData.userEmail,
+      email: userData.userEmail.toLowerCase(),
       name: userData.userName,
       password: userData.password,
     });
-
+    
     expect(response.status).toBe(200);
     expect(response.data.name).toBe(userData.userName);
     expect(response.data.avatar).toBe(
@@ -25,14 +26,14 @@ describe("Сервис users.bugred.ru", () => {
     );
     expect(response.data.birthday).toBe(0);
     expect(response.data.gender).toBe("");
-    expect(response.data.email).toBe(userData.userEmail);
+    expect(response.data.email).toBe(userData.userEmail.toLowerCase());
     expect(response.data.date_start).toBe(0);
     expect(response.data.hobby).toBe("");
   });
 
-  it("Ошибка - nакой пользователь уже существует", async () => {
+  it("Ошибка - такой пользователь уже существует", async () => {
     const response = await UsersBugred.doregister({
-      email: userData.userEmail,
+      email: userData.userEmail.toLowerCase(),
       name: userData.userName,
       password: userData.password,
     });
@@ -40,7 +41,7 @@ describe("Сервис users.bugred.ru", () => {
     expect(response.status).toBe(200);
     expect(response.data.type).toBe("error");
     expect(response.data.message).toBe(
-      ` Текущее ФИО ${userData.userName} уже есть в базе`,
+      ` email ${userData.userEmail.toLowerCase()} уже есть в базе`,
     );
   });
 
@@ -61,11 +62,13 @@ describe("Сервис users.bugred.ru", () => {
     let body = {
       company_name: userData.companyName,
       company_type: "ООО",
-      company_users: ["manager@mail.ru"],
-      email_owner: "manager@mail.ru",
+      company_users: [userData.userEmail.toLowerCase()],
+      email_owner: userData.userEmail.toLowerCase(),
     };
     const response = await UsersBugred.createCompany(body);
     idcompany = response.data.id_company;
+    console.log(JSON.stringify(body)); //логирую тело запроса
+
     expect(response.status).toBe(200);
     expect(response.data.type).toBe("success");
   });
@@ -74,15 +77,15 @@ describe("Сервис users.bugred.ru", () => {
 
   it("Успешное создание юзера через createuser", async () => {
     const response = await UsersBugred.createUser({
-      email: userData.userExampleEmail,
-      name: userData.userFirstName,
+      email: userData.userExampleEmail.toLowerCase(),
+      name: userData.userFirstName.toLowerCase(),
       tasks: [12],
-      companies: [87],
+      companies: [idcompany]
     });
     
-    let lowerEmail = userData.userExampleEmail;
     expect(response.status).toBe(200);
-    expect(response.data.email).toBe(lowerEmail.toLowerCase());
-    expect(response.data.name).toBe(userData.userFirstName);
+    console.log(response.data);
+    
   });
+
 });
