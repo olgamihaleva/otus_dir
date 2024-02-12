@@ -1,4 +1,5 @@
 import { config } from "../config";
+import fetch from 'node-fetch'
 
 //здесь функции для запросов в систему http://users.bugred.ru
 
@@ -48,11 +49,24 @@ const createUser = async (data) => {
   };
 };
 
-//получение информации о юзере через getuser
+//добавление аватара addavatar
 
+
+const addAvatar = async(formData) => {
+  const response = await fetch (`${config.bugregURL}/tasks/rest/addavatar`, {
+    method: "POST",
+    body: formData
+  });
+  return {
+    headers: response.headers,
+    status: response.status,
+    data: await response.json(),
+  }
+}
 
 export default {
   doregister: doregister,
   createCompany: createCompany,
   createUser: createUser,
+  addAvatar: addAvatar
 };

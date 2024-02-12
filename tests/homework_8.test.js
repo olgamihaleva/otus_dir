@@ -1,4 +1,6 @@
 import { UsersBugred, UserFixture } from "../framework";
+import fs from 'node:fs'
+import FormData from 'form-data'
 
 describe("Сервис users.bugred.ru", () => {
   let userData;
@@ -88,5 +90,17 @@ describe("Сервис users.bugred.ru", () => {
     expect(response.data.name).toBe(userData.userFirstName)
     
   });
+
+  //добавление аватара юзеру 
+  it("Добавление аватарки юзеру", async () => { 
+    const formData = new FormData();
+    formData.append('email', userData.userEmail.toLowerCase())
+    formData.append('avatar', fs.createReadStream('./framework/fixtures/files/small_pic.JPG'))
+
+    const response = await UsersBugred.addAvatar(formData)
+    expect(response.status).toBe(200);
+
+
+  })
 
 }); 
