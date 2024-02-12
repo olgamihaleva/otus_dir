@@ -48,6 +48,9 @@ const createUser = async (data) => {
   };
 };
 
+//получение информации о юзере через getuser
+
+
 export default {
   doregister: doregister,
   createCompany: createCompany,

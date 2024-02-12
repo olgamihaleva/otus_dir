@@ -3,3 +3,5 @@ reports
 build
 .idea
 coverage
+allure-report
+allure-results

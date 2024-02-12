@@ -78,14 +78,15 @@ describe("Сервис users.bugred.ru", () => {
   it("Успешное создание юзера через createuser", async () => {
     const response = await UsersBugred.createUser({
       email: userData.userExampleEmail.toLowerCase(),
-      name: userData.userFirstName.toLowerCase(),
+      name: userData.userFirstName,
       tasks: [12],
       companies: [idcompany]
     });
     
     expect(response.status).toBe(200);
-    console.log(response.data);
+    expect(response.data.email).toBe(userData.userExampleEmail.toLowerCase());
+    expect(response.data.name).toBe(userData.userFirstName)
     
   });
 
-});
+}); 
