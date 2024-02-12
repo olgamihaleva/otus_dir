@@ -12,7 +12,8 @@
     "codestyle": "run-p lint format",
     "codestyle:fix": "run-s lint:fix format:fix",
     "build": "babel src --out-dir build --source-maps inline",
-    "test": "jest"
+    "test": "jest --setupFiles dotenv/config --verbose",
+    "coverage": "jest --coverage"
   },
   "author": "Olga Mihaleva",
   "license": "MIT",
@@ -39,6 +40,8 @@
     "prettier": "3.1.1"
   },
   "dependencies": {
+    "axios": "^1.6.7",
+    "dotenv": "^16.4.1",
     "faker": "^6.6.6"
   }
 }
