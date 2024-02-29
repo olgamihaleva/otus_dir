@@ -1,0 +1,7 @@
+reports
+build
+.idea
+coverage
+allure-report
+allure-results
+node_modules
