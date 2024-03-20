@@ -1,7 +1,7 @@
 import { config } from "../config";
 import fetch from 'node-fetch'
 
-//здесь функции для запросов в систему http://users.bugred.ru
+// здесь функции для запросов в систему http://users.bugred.ru
 
 // doregister
 
@@ -19,7 +19,7 @@ const doregister = async (data) => {
   };
 };
 
-//создание компании
+// создание компании
 
 const createCompany = async (data) => {
   const response = await fetch(`${config.bugregURL}/tasks/rest/createcompany`, {
@@ -49,7 +49,7 @@ const createUser = async (data) => {
   };
 };
 
-//добавление аватара addavatar
+// добавление аватара addavatar
 
 
 const addAvatar = async(formData) => {
@@ -65,8 +65,8 @@ const addAvatar = async(formData) => {
 }
 
 export default {
-  doregister: doregister,
-  createCompany: createCompany,
-  createUser: createUser,
-  addAvatar: addAvatar
+  doregister,
+  createCompany,
+  createUser,
+  addAvatar
 };

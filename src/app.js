@@ -12,7 +12,7 @@
 
 function getScore(students) {
   let score = 0;
-  for (let key in students) {
+  for (const key in students) {
     if (typeof students[key] === "number") {
       score += students[key];
     }
@@ -28,5 +28,5 @@ const students = {
   nanami: null,
 };
 
-let answer = getScore(students);
+const answer = getScore(students);
 console.log(`Ответ на первое задание ${answer}`);

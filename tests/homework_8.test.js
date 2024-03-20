@@ -58,10 +58,10 @@ describe("Сервис users.bugred.ru", () => {
     expect(response.data.message).toBe("Параметр email является обязательным!");
   });
 
-  //создание компании пользователя
+  // создание компании пользователя
 
   it("Успешное создание компании", async () => {
-    let body = {
+    const body = {
       company_name: userData.companyName,
       company_type: "ООО",
       company_users: [userData.userEmail.toLowerCase()],
@@ -69,13 +69,13 @@ describe("Сервис users.bugred.ru", () => {
     };
     const response = await UsersBugred.createCompany(body);
     idcompany = response.data.id_company;
-    console.log(JSON.stringify(body)); //логирую тело запроса
+    console.log(JSON.stringify(body)); // логирую тело запроса
 
     expect(response.status).toBe(200);
     expect(response.data.type).toBe("success");
   });
 
-  //создание юзера через createuser
+  // создание юзера через createuser
 
   it("Успешное создание юзера через createuser", async () => {
     const response = await UsersBugred.createUser({
@@ -91,7 +91,7 @@ describe("Сервис users.bugred.ru", () => {
     
   });
 
-  //добавление аватара юзеру 
+  // добавление аватара юзеру 
   it("Добавление аватарки юзеру", async () => { 
     const formData = new FormData();
     formData.append('email', userData.userEmail.toLowerCase())
