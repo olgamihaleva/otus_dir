@@ -60,7 +60,7 @@ jobs:
 
   notification:
     if: always()
-    needs: [eslint, prettier, test]
+    needs: [prettier, test]
 
     environment:
       name: github-pages
