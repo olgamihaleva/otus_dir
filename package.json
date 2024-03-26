@@ -14,7 +14,7 @@
     "build": "babel src --out-dir build --source-maps inline",
     "test": "jest --setupFiles dotenv/config --verbose",
     "test:ci": "cross-env CI=true NODE_OPTIONS=\"--max-old-space-size=2048\" jest",
-    "coverage": "jest --coverage", 
+    "coverage": "jest --coverage",
     "allure": "allure serve allure-results",
     "allure:ci": "allure generate allure-results --clean",
     "allure:ci:show": "allure open allure-report"
@@ -47,6 +47,7 @@
     "prettier": "3.1.1"
   },
   "dependencies": {
+    "ajv": "^8.12.0",
     "axios": "^1.6.7",
     "dotenv": "^16.4.1",
     "faker": "^5.5.3",
