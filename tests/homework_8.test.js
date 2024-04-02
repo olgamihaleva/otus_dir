@@ -1,6 +1,6 @@
 import { UsersBugred, UserFixture, UserSchemas } from "../framework";
-import fs from "node:fs";
-import FormData from "form-data";
+import fs from 'node:fs'
+import FormData from 'form-data'
 import Ajv from "ajv"; // для валидации по json-схеме
 
 describe("Сервис users.bugred.ru", () => {
@@ -8,9 +8,10 @@ describe("Сервис users.bugred.ru", () => {
   let idcompany;
 
   const ajv = new Ajv();
-
+ 
   beforeAll(async () => {
     userData = UserFixture.generateUserData();
+
   });
 
   it("Успешная регистрация юзера через doregister", async () => {
@@ -19,7 +20,7 @@ describe("Сервис users.bugred.ru", () => {
       name: userData.userName,
       password: userData.password,
     });
-
+    
     expect(response.status).toBe(200);
     expect(response.data.name).toBe(userData.userName);
     expect(response.data.avatar).toBe(
@@ -34,8 +35,8 @@ describe("Сервис users.bugred.ru", () => {
     expect(response.data.date_start).toBe(0);
     expect(response.data.hobby).toBe("");
 
+    
     // Валидация ответа по схеме JSON
-    console.log("ЛОГИРУЮ СХЕМУ" + UserSchemas);
     const validate = ajv.compile(UserSchemas.doRegisterSchema);
     const valid = validate(response.data);
 
@@ -95,24 +96,25 @@ describe("Сервис users.bugred.ru", () => {
       email: userData.userExampleEmail.toLowerCase(),
       name: userData.userFirstName,
       tasks: [12],
-      companies: [idcompany],
+      companies: [idcompany]
     });
-
+    
     expect(response.status).toBe(200);
     expect(response.data.email).toBe(userData.userExampleEmail.toLowerCase());
-    expect(response.data.name).toBe(userData.userFirstName);
+    expect(response.data.name).toBe(userData.userFirstName)
+    
   });
 
-  // добавление аватара юзеру
-  it("Добавление аватарки юзеру", async () => {
+  // добавление аватара юзеру 
+  it("Добавление аватарки юзеру", async () => { 
     const formData = new FormData();
-    formData.append("email", userData.userEmail.toLowerCase());
-    formData.append(
-      "avatar",
-      fs.createReadStream("./framework/fixtures/files/small_pic.JPG"),
-    );
+    formData.append('email', userData.userEmail.toLowerCase())
+    formData.append('avatar', fs.createReadStream('./framework/fixtures/files/small_pic.JPG'))
 
-    const response = await UsersBugred.addAvatar(formData);
+    const response = await UsersBugred.addAvatar(formData)
     expect(response.status).toBe(200);
-  });
-});
+
+
+  })
+
+}); 
