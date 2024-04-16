@@ -38,7 +38,7 @@ module.exports = defineConfig({
       name: 'chromium',
       use: { ...devices['Desktop Chrome'],
         storageState: 'playwright/.auth/user.json'},
-      dependencies: ['setup'],
+    //  dependencies: ['setup'], - это для получения авторизации на топфейс
     },
 /*
     {
