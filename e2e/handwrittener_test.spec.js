@@ -3,19 +3,16 @@ const { HandwrittnerLoginPage } = require('../pages/loginPage');
 const { ForgotPasswordPage } = require('../pages/forgotpasswordPage');
 const exp = require('constants');
 
-// Запускает тесты последовательно в рамках одного файла
-test.describe.configure({ mode: 'serial' });
-
-test('Ошибка при авторизации без каптчи на Handwrittner', async ({ page }) => {
-  const HandwrittnerLogin = new HandwrittnerLoginPage(page); //вопрос может лучше вынести создание перед всеми тестами, а не прописывать в каждом тесте?
+test('Ошибка при авторизации без каптчи на Handwrittner', async ({page}) => {
+  const HandwrittnerLogin = new HandwrittnerLoginPage(page); 
   await HandwrittnerLogin.open();
-  await HandwrittnerLogin.login('olgabathory1560@yandex.ru', '5w6u_W#fSk5$2BX'); //вопрос как безопасно хранить креды?
+  await HandwrittnerLogin.login('olgabathory1560@yandex.ru', '5w6u_W#fSk5$2BX');
   await expect(page.locator('//div[@class="error"]')).toBeVisible();
 });
 
 test("Открытие экрана регистрации со страницы логина", async ({page}) => { 
   const HandwrittnerLogin = new HandwrittnerLoginPage(page);
- // await HandwrittnerLogin.open();
+  await HandwrittnerLogin.open();
   await HandwrittnerLogin.openRegistration();
   await expect(page).toHaveURL(/reg/);
 })
